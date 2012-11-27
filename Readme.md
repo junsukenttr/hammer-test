@@ -1,4 +1,4 @@
-　#Hammer for Mac TEST
+#Hammer for Mac TEST
 
 MacのBuildアプリ「[Hammer for Mac](http://hammerformac.com/)」をお試ししてる一式。
 
