@@ -1,0 +1,129 @@
+<p>　#Hammer for Mac TEST</p>
+
+<p>MacのBuildアプリ「<a href="http://hammerformac.com/">Hammer for Mac</a>」をお試ししてる一式。</p>
+
+<ul>
+  <li><a href="http://help.hammerformac.com/">Hammer Documentation</a></li>
+  <li><a href="http://mac.appstorm.net/reviews/web-dev-review/stop-hammertime-with-hammer-for-mac/">appstorm</a></li>
+</ul>
+
+<hr />
+<p>##ざっくり特徴
+<strong>Hammer</strong>はプロジェクトのフォルダを登録すると更新があるごとに自動でビルドしてくれるGUIアプリ。<br />
+HamlやSassなどの様にアプリ内で主にhtmlに独自のメタ言語で変数やインクルードなどが使える。  <br />
+プロジェクトフォルダを指定すると監視をはじめフォルダ内に「Build」フォルダを作成し書き出す。</p>
+
+<hr />
+
+<h2 id="clever-paths">Clever Paths</h2>
+<p>その名の通り賢いパス。「@path」で指定<br />
+画像名やCSSファイル名を指定するだけで自動で検索、パスを補完してくれる。</p>
+
+<pre><code>&lt;img src="&lt;!-- @path mac.png --&gt;" /&gt; これでmac.pngまでのパスを補完してくれる。
+</code></pre>
+
+<p>CSSでもClever Pathsは効く模様。</p>
+
+<pre><code>background-image: url(bg.png) これでもimagesフォルダのbg.pngを補完してくれた。
+</code></pre>
+
+<p>同じファイル名は階層の浅い順かアルファベット順で拾ってくるっぽい(？)<br />
+ただし「include」や「stylesheet」というフォルダはルートより優先された。<br />
+関数名と同じフォルダ名は優先されるみたい。まだあるのかもしれない。<br />
+同じファイル名使えないってのは悩ましい。</p>
+
+<hr />
+<p>## HTML Includes</p>
+
+<pre><code>&lt;!-- @include header --&gt; で「header.html」をインクルード。   ビルドしたhtmlに書き出される。   Clever Pathsにて自動でパスを補完してくれる。
+</code></pre>
+
+<p>サンプルは</p>
+
+<p><code>&lt;!-- @include _header.html --&gt;</code></p>
+
+<p>ってなってるけど、アンダーバーも拡張子も無くても読み込む。<br />
+Sassのパーシャルみたいにアンダーバーを付けているファイルだからWatchしないとかそうゆうことでも無いみたい。</p>
+
+<hr />
+
+<h2 id="stylesheets--javascript">Stylesheets &amp; JavaScript</h2>
+<pre><code>&lt;!-- @stylesheet style --&gt;
+&lt;!-- @javascript app --&gt; と書くと
+</code></pre>
+
+<p>@styleseetでlinkタグ,CSSファイルパス挿入。<br />
+@javascriptでscriptタグ,JSファイルパス挿入。</p>
+
+<pre><code>&lt;link rel="stylesheet" href="stylesheets/style.css" /&gt;
+&lt;script src="assets/js/app.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>こう書き出される。<br />
+これもパスはもちろん補完してくれる。	</p>
+
+<p>scssファイルも拡張子無しで読み込んでcssで指定してくれる。<br />
+coffeeファイルもjsで書き出される。</p>
+
+<pre><code>&lt;!-- @stylesheet assets/css/* --&gt; *でフォルダ内のファイルを全部書き出し	
+
+&lt;link rel="stylesheet" href="assets/css/reset.css"/&gt;
+&lt;link href="base.css" rel="assets/css/style.css"  /&gt;
+&lt;link href="text.css" rel="assets/css/mobile.css"  /&gt; こんな感じになるらしい。
+</code></pre>
+
+<hr />
+
+<h2 id="navigation-helpers">Navigation Helpers</h2>
+
+<pre><code>&lt;ul class="menu"&gt;
+	&lt;li&gt;&lt;a href="&lt;!-- @path index.html --&gt;"&gt;Home&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="&lt;!-- @path about.html --&gt;"&gt;About&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="&lt;!-- @path contact.html --&gt;"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt; リンクをClever Pathsで書くと
+
+&lt;ul class="menu"&gt;
+	&lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+	&lt;li class="current"&gt;&lt;a href="about.html" class="current"&gt;About&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="contact.html"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>現在地のファイルにはclass「current」を付けてくれる機能らしい。</p>
+
+<hr />
+<p>##Variables</p>
+
+<p>html内で変数が使える。</p>
+
+<pre><code>&lt;!-- $title My New Title --&gt;
+</code></pre>
+
+<p>で変数セット。  </p>
+
+<p>「$title」が変数<br />
+「 My New Title」が値</p>
+
+<pre><code>&lt;title&gt;&lt;!-- $title --&gt;&lt;/title&gt; で変数呼び出し
+
+&lt;title&gt;My New Title&lt;/title&gt; ビルドするとこうなる。	
+</code></pre>
+
+<hr />
+
+<h2 id="automatic-reload">Automatic Reload</h2>
+<pre><code>&lt;!-- @reload --&gt; このタグ書くと
+
+&lt;script&gt;
+    setTimeout(function(){
+      ws = new WebSocket('ws://localhost:00000')
+      ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+    }, 500)
+  &lt;/script&gt; こんなタグを吐き出す。
+</code></pre>
+
+<p>buildフォルダ内のhtmlをブラウザで開いておけば自動で更新されるAutoReloadができる。</p>
+
+<p>Documentだとhead要素の中に書けって書いてあるけど別にbody閉じタグの前でもそりゃ動きます。</p>
+
+<hr />

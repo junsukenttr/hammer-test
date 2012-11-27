@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+//読み込みSCSSテストファイル
+
+
+body {
+  /* CSSでもClever Pathsは効く */
+  background-image: url(bg.png);
+}
+
+header {
+	background: #ccc;
+	padding: 10px;
+}
+footer {
+	@extend header;
+}
+
+//Bourbon mixinが使える
+.example {
+  @include border-radius(10px);
+  @include border-radius(5px 5px 2px 2px);
+}
+

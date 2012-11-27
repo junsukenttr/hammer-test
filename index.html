@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+<head>
+	<meta charset="UTF-8">
+	<!-- 変数 -->	
+	<title><!-- $title --></title>
+	<!-- ＠styleseetでlinkタグ,CSSファイル挿入 -->	
+	<!-- ファイルパスを自動補完！ -->
+	<!-- @stylesheet style -->
+	<!-- @stylesheet scss -->
+
+	<!-- ＠javascriptでスクリプトタグ,JSファイル挿入 -->		
+	<!-- @javascript js/* -->
+	<!-- @reload -->
+	<!-- ＠reloadでReloadタグ挿入 -->	
+
+</head>
+<body>
+<h1><!-- $title --></h1>
+
+<!-- 
+＠pathで画像までのファイルパスを自動補完
+-->	
+<h2><img src="<!-- @path logo.png -->" width="100" height="100" alt="logo"></h2>
+<!-- 
+＠includeでhtmlファイルをインクルード
+-->
+<!-- @include header -->
+
+
+<!-- 
+＠pathでリンクまでのファイルパスを自動補完
+現在地にはclass="current"が付与
+-->	
+<nav>
+	<ul class="menu">
+		<li><a href="<!-- @path index.html -->">Home</a></li>
+		<li><a href="<!-- @path about.html -->">About</a></li>
+		<li><a href="<!-- @path contact.php -->">Contact</a></li>
+	</ul>
+</nav>
+
+
+<p>テキストテキストテキストテキスト</p>	
+<p><!-- $text --><br>
+<!-- $text2 --></p>
+<p><!-- $text3 -->、<br>
+タグなどはincludeするということですね。</p>
+
+
+<!-- @include footer -->
+
+
+<!-- 
+変数は＄で定義（ファイル内なら宣言どこでもいいっぽい）
+-->
+<!-- $title Hammer for Macのテスト -->
+
+</body>
+</html>		
+
+			

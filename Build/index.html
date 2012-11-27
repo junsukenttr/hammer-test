@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+	<meta charset="UTF-8" />
+	<!-- 変数 -->	
+	<title>Hammer for Macのテスト</title>
+	<!-- ＠styleseetでlinkタグ,CSSファイル挿入 -->	
+	<!-- ファイルパスを自動補完！ -->
+	<link type="text/css" href="css/style.css" rel="stylesheet" />
+	<link type="text/css" href="stylesheet/scss.css" rel="stylesheet" />
+
+	<!-- ＠javascriptでスクリプトタグ,JSファイル挿入 -->		
+	
+	<script>
+        setTimeout(function(){
+          ws = new WebSocket('ws://localhost:35353')
+          ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+        }, 500)
+      </script>
+	<!-- ＠reloadでReloadタグ挿入 -->	
+
+</head>
+<body>
+<h1>Hammer for Macのテスト</h1>
+
+<!-- 
+＠pathで画像までのファイルパスを自動補完
+-->	
+<h2><img alt="logo" src="images/logo.png" width="100" height="100" /></h2>
+<!-- 
+＠includeでhtmlファイルをインクルード
+-->
+<header>ヘッダーインクルードしてるよ</header>
+
+
+<!-- 
+＠pathでリンクまでのファイルパスを自動補完
+現在地にはclass="current"が付与
+-->	
+<nav>
+	<ul class="menu">
+		<li class="current"><a class=" current" href="index.html">Home</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="contact.php">Contact</a></li>
+	</ul>
+</nav>
+
+
+<p>テキストテキストテキストテキスト</p>	
+<p>インクルードファイルの変数も拾ってくる。<br />
+つまり変数用のhtmlファイルを作ることも可能？</p>
+<p>htmlのタグなどは変数内ではエラーを吐きました、<br />
+タグなどはincludeするということですね。</p>
+
+
+<footer>フッターインクルードしてるよ</footer>
+
+
+
+
+
+
+<!-- 
+変数は＄で定義（ファイル内なら宣言どこでもいいっぽい）
+-->
+
+
+</body>
+</html>		
+
+			
