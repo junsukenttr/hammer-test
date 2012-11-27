@@ -6,8 +6,8 @@
 	<title>Hammer for Macのテスト</title>
 	<!-- ＠styleseetでlinkタグ,CSSファイル挿入 -->	
 	<!-- ファイルパスを自動補完！ -->
-	<link type="text/css" href="css/style.css" rel="stylesheet" />
-	<link type="text/css" href="stylesheet/scss.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheet/scss.css" />
 
 	<!-- ＠javascriptでスクリプトタグ,JSファイル挿入 -->		
 	
@@ -26,7 +26,7 @@
 <!-- 
 ＠pathで画像までのファイルパスを自動補完
 -->	
-<h2><img alt="logo" src="images/logo.png" width="100" height="100" /></h2>
+<h2><img alt="logo" height="100" src="images/logo.png" width="100" /></h2>
 <!-- 
 ＠includeでhtmlファイルをインクルード
 -->
@@ -39,7 +39,7 @@
 -->	
 <nav>
 	<ul class="menu">
-		<li class="current"><a class=" current" href="index.html">Home</a></li>
+		<li class="current"><a href="index.html" class=" current">Home</a></li>
 		<li><a href="about.html">About</a></li>
 		<li><a href="contact.php">Contact</a></li>
 	</ul>
