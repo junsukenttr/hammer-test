@@ -1,22 +1,33 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="ja-JP">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<!-- 変数 -->	
 	<title>Hammer for Macのテスト</title>
-	<!-- ＠styleseetでlinkタグ,CSSファイル挿入 -->	
+	<!-- ＠styleseetでlinkタグ,cssファイル挿入 -->	
 	<!-- ファイルパスを自動補完！ -->
-	<link type="text/css" href="css/style.css" rel="stylesheet" />
-	<link type="text/css" href="stylesheet/scss.css" rel="stylesheet" />
-
-	<!-- ＠javascriptでスクリプトタグ,JSファイル挿入 -->		
+	<link rel='stylesheet' type='text/css' href='css/style.css'>
+	<link rel='stylesheet' type='text/css' href='stylesheet/scss.css'>
+	<!-- ＠javascriptでスクリプトタグ,jsファイル挿入 -->		
 	
 	<script>
-        setTimeout(function(){
-          ws = new WebSocket('ws://localhost:35353')
-          ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
-        }, 500)
-      </script>
+  setInterval(function(){
+    try {
+      if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+      ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+      ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+      ws.onmessage = function(){
+        var links = document.getElementsByTagName('link'); 
+          for (var i = 0; i < links.length;i++) { 
+          var link = links[i]; 
+          if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+            link.href = link.href.split('?')[0]+'?'+(new Date()).getTime()
+          }
+        }
+      }
+    }catch(e){}
+  }, 500)
+</script>
 	<!-- ＠reloadでReloadタグ挿入 -->	
 
 </head>
@@ -26,7 +37,7 @@
 <!-- 
 ＠pathで画像までのファイルパスを自動補完
 -->	
-<h2><img width="100" height="100" src="images/logo.png" alt="logo" /></h2>
+<h2><img src="images/logo.png" width="100" height="100" alt="logo"></h2>
 <!-- 
 ＠includeでhtmlファイルをインクルード
 -->
@@ -39,7 +50,7 @@
 -->	
 <nav>
 	<ul class="menu">
-		<li class="current"><a class=" current" href="index.html">Home</a></li>
+		<li class='current'><a class='current' href="index.html">Home</a></li>
 		<li><a href="about.html">About</a></li>
 		<li><a href="contact.php">Contact</a></li>
 	</ul>
@@ -47,9 +58,9 @@
 
 
 <p>テキストテキストテキストテキスト</p>	
-<p>インクルードファイルの変数も拾ってくる。<br />
+<p>インクルードファイルの変数も拾ってくる。<br>
 つまり変数用のhtmlファイルを作ることも可能？</p>
-<p>htmlのタグなどは変数内ではエラーを吐きました、<br />
+<p>htmlのタグなどは変数内ではエラーを吐きました、<br>
 タグなどはincludeするということですね。</p>
 
 

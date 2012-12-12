@@ -19,8 +19,8 @@ HamlやSassなどの様にアプリ内で主にhtmlに独自のメタ言語で�
 その名の通り賢いパス。「@path」で指定  
 画像名やCSSファイル名を指定するだけで自動で検索、パスを補完してくれる。
 
-	<img src="<!-- @path mac.png -->" />
-これでmac.pngまでのパスを補完してくれる。
+	<img src="<!-- @path logo.png -->" />
+これでlogo.pngまでのパスを補完してくれる。
 
 CSSでもClever Pathsは効く模様。
 
@@ -130,7 +130,7 @@ html内で変数が使える。
   
 buildフォルダ内のhtmlをブラウザで開いておけば自動で更新されるAutoReloadができる。
 
-Documentだとhead要素の中に書けって書いてあるけど別にbody閉じタグの前でもそりゃ動きます。
+Documentだとhead要素の中に書けって書いてあるけど別にbody閉じタグの前でも動きます。
 
 ---
 
